@@ -1,0 +1,30 @@
+https://download.mozilla.org/?product=thunderbird-msi-latest-ssl&os=win64&lang=en-US
+ 
+ 
+2. Voorbereiding van de MSI
+Je kunt de installatie aanpassen met MSI-transformaties (.MST-bestanden). Deze kunnen worden gemaakt met tools zoals Microsoft Orca:
+ 
+Pas de standaardinstellingen aan, zoals installatiepaden of snelkoppelingen.
+Stel opties in zoals het uitschakelen van automatische updates of het toevoegen van plug-ins【5】.
+3. Deel het MSI-bestand
+Plaats het MSI-bestand in een gedeelde netwerkmap die toegankelijk is voor alle clientmachines. Zorg ervoor dat de juiste machtigingen zijn ingesteld (leestoegang voor de computeraccounts).
+4. GPO Instellen in Windows Server
+a. Open Group Policy Management
+Start Group Policy Management Console (GPMC).
+Maak een nieuwe GPO of gebruik een bestaande GPO.
+b. Configureer Software Deployment
+Ga naar: Computer Configuration → Policies → Software Settings → Software Installation.
+Klik met de rechtermuisknop op Software Installation en selecteer New → Package.
+Selecteer het MSI-bestand vanuit de gedeelde netwerkmap (gebruik UNC-paden, bijvoorbeeld: \\server\share\thunderbird.msi).
+Kies Assigned als deploymentmethode.
+c. Link de GPO aan een OU
+Koppel de GPO aan een Organizational Unit (OU) die de computers of gebruikers bevat waarop Thunderbird moet worden geïnstalleerd.
+Zorg ervoor dat de clientcomputers toegang hebben tot de GPO.
+5. Policies en Configuratie
+Gebruik een policies.json-bestand om instellingen in Thunderbird aan te passen (zoals standaard accounts, updates of gebruikersvoorkeuren). Meer informatie over het configureren van policies kun je vinden op de Thunderbird@Work-site【9】.
+ 
+6. Clientcomputers Herstarten
+Herstart de clientcomputers of voer het commando gpupdate /force uit om de GPO direct toe te passen.
+Thunderbird wordt automatisch geïnstalleerd op de clientmachines bij de volgende herstart.
+7. Controleer de Installatie
+Verifieer dat Thunderbird correct is geïnstalleerd en de juiste configuratie heeft toegepast.
