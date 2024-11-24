@@ -1,0 +1,103 @@
+Het monitoren van een Windows Server en clients in je netwerk vereist een strategie waarbij zowel server- als clientactiviteiten centraal beheerd en bewaakt worden. Hier zijn de stappen om monitoring correct in te stellen:
+
+1. Bepaal Monitoringbehoeften
+Voor de Server:
+Monitor CPU, geheugen, schijf, en netwerkgebruik.
+Controleer op fouten in logboeken en beveiligingsinbreuken.
+Bewaak de prestaties van specifieke rollen (bijvoorbeeld Active Directory, IIS, of SQL Server).
+Voor de Clients:
+Volg systeemgezondheid en softwaregebruik.
+Monitor netwerkactiviteit.
+Controleer beveiligingsgebeurtenissen (zoals mislukte inlogpogingen).
+2. Monitoringtools Configureren
+2.1 Serverbeheer
+Gebruik Serverbeheer om je servers in het netwerk te monitoren:
+
+Voeg alle servers en clients toe aan Serverbeheer:
+Open Serverbeheer op de hoofdserver.
+Klik op Alle servers > Beheer > Server toevoegen.
+Voeg servers en eventueel clients toe via hun naam of IP-adres.
+Hier kun je basisinformatie zien, zoals rollenstatussen en foutmeldingen.
+2.2 Windows Event Viewer (Gebeurtenislogboeken)
+Voor zowel servers als clients kun je centrale logboekregistratie configureren:
+
+Instellen van Forwarding:
+Op de server (collector):
+Open Event Viewer en configureer Event Subscription.
+Klik op Subscription Manager en stel abonnementen in om logboeken van clients te verzamelen.
+Op clients:
+Zorg ervoor dat de Windows Remote Management (WinRM)-service is ingeschakeld:
+powershell
+Code kopiëren
+Enable-PSRemoting -Force
+Configureer het om logs naar de server te sturen.
+Logboeken bekijken:
+Controleer beveiliging, systeemfouten, en toepassingslogs op de collectorserver.
+2.3 Performance Monitor (Prestatiemonitor)
+Gebruik Performance Monitor om server- en clientprestaties over tijd te volgen:
+
+Datacollectiesets configureren:
+Op de server:
+Open Performance Monitor (perfmon).
+Maak een Data Collector Set:
+Voeg tellers toe zoals CPU-gebruik, geheugengebruik, en netwerksnelheid.
+Stel de uitvoer in naar een gedeelde netwerkmap.
+Remote Monitoring:
+Voeg de clients toe via Performance Monitor op de server:
+Klik met de rechtermuisknop op Monitoringshulpmiddelen > Verbinden met een andere computer.
+Je kunt nu prestaties van clients monitoren vanuit één centrale locatie.
+3. Gebruik van Windows Admin Center
+Windows Admin Center is een webgebaseerde oplossing voor het beheren en monitoren van zowel servers als clients:
+
+Installeren:
+Download en installeer het Windows Admin Center (WAC) op een beheerserver of pc.
+Verbinden met Servers en Clients:
+Voeg servers en Windows 10/11-clients toe aan WAC door hun namen of IP-adressen te gebruiken.
+Beheer en monitor hardwarestatus, bronnen en beveiligingslogs.
+Voordelen:
+Centraal beheer van meerdere systemen.
+Intuïtieve dashboards voor realtime monitoring.
+4. Beheer via Group Policy (GPO)
+Voor consistente monitoringinstellingen kun je Group Policy gebruiken:
+
+Windows Remote Management (WinRM) inschakelen:
+Open de Group Policy Management Console op de server.
+Maak een nieuwe GPO of wijzig een bestaande.
+Ga naar:
+java
+Code kopiëren
+Computerconfiguratie > Beheersjablonen > Windows-componenten > Windows Remote Management (WinRM) > WinRM Service
+Schakel de regel in: Allow remote server management through WinRM.
+Pas de GPO toe op je clients.
+Beveiligingslogboeken en monitoring-instellingen afdwingen:
+Ga naar:
+Code kopiëren
+Computerconfiguratie > Beveiligingsinstellingen > Beveiligingsopties
+Stel auditing en logboekregistratie in voor kritieke gebeurtenissen.
+5. Externe Tools Gebruiken
+Als je een uitgebreider overzicht wilt of een groot netwerk hebt, kun je externe tools inzetten:
+
+System Center Operations Manager (SCOM):
+Dit is een Microsoft-oplossing voor enterprise monitoring.
+Configureer agents op zowel servers als clients.
+Biedt gedetailleerde monitoring en waarschuwingen.
+Andere opties:
+PRTG Network Monitor of Nagios: Voor netwerkbrede monitoring.
+Azure Monitor: Voor hybride omgevingen.
+6. Netwerkmonitoring Configureren
+Gebruik de Resource Monitor of een specifieke netwerktool:
+
+Op de server:
+Open de Resource Monitor en bekijk netwerkgebruik per proces of IP-adres.
+Voor uitgebreide analyses:
+Installeer tools zoals Wireshark of Microsoft Message Analyzer.
+Samenvatting van de Setup
+Configureer een centrale beheerlocatie:
+Gebruik Serverbeheer, Windows Admin Center of Event Forwarding.
+Activeer Remote Monitoring:
+Schakel WinRM in via GPO.
+Gebruik ingebouwde tools:
+Taakbeheer, Resource Monitor, Performance Monitor.
+Overweeg externe tools voor schaalbaarheid:
+Zoals System Center, PRTG, of Azure Monitor.
+Heb je hulp nodig met een specifieke stap?
