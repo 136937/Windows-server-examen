@@ -1,0 +1,20 @@
+Het maken van een Group Policy Object (GPO) om gebruikersactiviteit zoals foutmeldingen of mislukte logins te loggen, kan worden bereikt door specifieke auditinstellingen in te schakelen en Windows-logboeken te configureren. Hier zijn de stappen die je kunt volgen:
+1. Auditbeleid inschakelen
+Auditbeleid is een Windows-functie waarmee je gebeurtenissen zoals foutieve logins of foutmeldingen kunt loggen in het Event Viewer-logboek.
+Stappen:
+Open de Group Policy Management Console (GPMC):
+Druk op Win + R, typ gpmc.msc en druk op Enter.
+Maak of bewerk een GPO:
+Klik met de rechtermuisknop op de gewenste organisatie-eenheid (OU) of domein en kies Create a GPO in this domain of bewerk een bestaande GPO.
+Navigeren naar Auditbeleid:
+Ga naar:
+Computer Configuration -> Policies -> Windows Settings -> Security Settings -> Advanced Audit Policy Configuration -> Audit Policies
+Schakel de volgende auditcategorieën in:
+Account Logon:
+Log successen en fouten. Bijvoorbeeld: Audit Logon Events (Success, Failure).
+Account Management:
+Log wijzigingen aan gebruikersaccounts.
+Logon/Logoff:
+Log lokale en netwerklogins.
+Forceer een update van de GPO:
+Voer gpupdate /force uit op de clients of wacht op automatische update.
